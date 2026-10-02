@@ -6,17 +6,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get -y update
 RUN apt-get install -y curl nano wget nginx git
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-
-
-# Install Yarn
-RUN apt-get update && apt-get install -y yarn
-
-# Install PIP
-# RUN easy_install pip
-
+# This image is only used by the `api` service. Mongo and the React app run on
+# their official images (see docker-compose.yml). pip ships with python:3.8.
 
 ENV ENV_TYPE staging
 ENV MONGO_HOST mongo

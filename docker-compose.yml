@@ -5,7 +5,7 @@ services:
     command: bash -c "cd /src/rest && python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
-    links:
+    depends_on:
       - mongo
     volumes:
       - ${ADBREW_CODEBASE_PATH}/tmp:/tmp
@@ -21,7 +21,6 @@ services:
       - ${ADBREW_CODEBASE_PATH}:/src
 
   mongo:
-    # build: .
     image: mongo:4.4
     container_name: mongo
     restart: always
